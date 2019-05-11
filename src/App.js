@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
-// import { createStore } from 'redux';
+import { connect } from 'react-redux'
+import { addModel } from './actions/addModel'
 
 const data = {
   "Ivel Z3": {
@@ -25,25 +26,20 @@ const data = {
   }
 }
 
-// const reducer = (state = 'red', action) => {
-//   return state
-// }
-
-// const store = createStore(reducer)
-
 class App extends Component {
   state = {
     value: ''
   }
 
   updateSelection = (event) => {
-    console.log(event.target.value, event);
-    this.setState({selected: event.target.value})
+    this.setState({ value: event.target.value })
+  }
+
+  addComputer = () => {
+    this.props.addModel(data[this.state.value])
   }
 
   render() {
-    // console.log(store.getState());
-
     return (
       <div className="App">
         <h3>Computer models</h3>
@@ -55,9 +51,20 @@ class App extends Component {
             </option>
           )}
         </select>
+        <button onClick={this.addComputer}>Add</button>
       </div>
     );
   }
 }
 
-export default App;
+const mapStateToProps = (state) => {
+  return {
+
+  }
+}
+
+const mapDispatchToProps = {
+  addModel
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(App)

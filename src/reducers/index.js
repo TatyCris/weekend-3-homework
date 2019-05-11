@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux'
-// import --- from '---'
+import computers from './computers'
 
 export default combineReducers({
-    // ---
+    computers
 })
