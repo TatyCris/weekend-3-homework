@@ -37,12 +37,12 @@ class App extends Component {
   }
 
   addComputer = () => {
-    this.state.value && this.props.addModel(data[this.state.value])
-  }
-
-  getComputersName = (model) => {
-    return Object.keys(data).find(key =>
-      JSON.stringify(data[key]) === JSON.stringify(model))
+    this.state.value && this.props.addModel(
+      {
+        name: this.state.value,
+        ...data[this.state.value]
+      }
+    )
   }
 
   render() {
@@ -50,9 +50,9 @@ class App extends Component {
       <div className="App">
         <h3>Computer models</h3>
         {this.props.computers.map((model, index) =>
-          <ModelDetails 
-            key={model.manufacturer + index + Math.random()}
-            name={this.getComputersName(model)}
+          <ModelDetails
+            key={model.name + index + Math.random()}
+            name={model.name}
             manufacturer={model.manufacturer}
             year={model.year}
             origin={model.origin}
