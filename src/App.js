@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 import { connect } from 'react-redux'
 import { addModel } from './actions/addModel'
+import ModelDetails from './components/ModelDetails'
 
 const data = {
   "Ivel Z3": {
@@ -39,10 +40,23 @@ class App extends Component {
     this.props.addModel(data[this.state.value])
   }
 
+  getComputersName = (model) => {
+    return Object.keys(data).find(key =>
+      JSON.stringify(data[key]) === JSON.stringify(model))
+  }
+
   render() {
     return (
       <div className="App">
         <h3>Computer models</h3>
+        {this.props.computers.map(model =>
+          <ModelDetails key={model.manufacturer}
+            name={this.getComputersName(model)}
+            manufacturer={model.manufacturer}
+            year={model.year}
+            origin={model.origin}
+          />
+        )}
         <select value={this.state.selected} onChange={this.updateSelection}>
           <option value="">-- pick a model --</option>
           {Object.entries(data).map(computer =>
@@ -59,7 +73,7 @@ class App extends Component {
 
 const mapStateToProps = (state) => {
   return {
-
+    computers: state.computers
   }
 }
 
