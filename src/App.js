@@ -37,7 +37,7 @@ class App extends Component {
   }
 
   addComputer = () => {
-    this.props.addModel(data[this.state.value])
+    this.state.value && this.props.addModel(data[this.state.value])
   }
 
   getComputersName = (model) => {
@@ -49,8 +49,9 @@ class App extends Component {
     return (
       <div className="App">
         <h3>Computer models</h3>
-        {this.props.computers.map(model =>
-          <ModelDetails key={model.manufacturer}
+        {this.props.computers.map((model, index) =>
+          <ModelDetails 
+            key={model.manufacturer + index + Math.random()}
             name={this.getComputersName(model)}
             manufacturer={model.manufacturer}
             year={model.year}
@@ -59,7 +60,7 @@ class App extends Component {
         )}
         <select value={this.state.selected} onChange={this.updateSelection}>
           <option value="">-- pick a model --</option>
-          {Object.entries(data).map(computer =>
+          {Object.entries(data).map((computer, index) =>
             <option key={computer[0]} value={computer[0]}>
               {computer[0]} ({computer[1].year})
             </option>

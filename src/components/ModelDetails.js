@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types';
+import './ModelDetails.css'
 
 export default class ModelDetails extends Component {
     static propTypes = {
@@ -11,7 +12,7 @@ export default class ModelDetails extends Component {
 
     render() {
         return (
-            <div>
+            <div className="ModelDetails">
                 <ul>
                     <li>Name: {this.props.name}</li>
                     <li>Manufacturer: {this.props.manufacturer}</li>
